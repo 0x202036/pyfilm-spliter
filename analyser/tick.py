@@ -43,17 +43,11 @@ class Tick:
         self.__sec = int(sec_fragment[0])
         self.__min_sec = int(sec_fragment[1])
 
-    def __add_digital(self, num: int):
-        return '0'+str(num) if(num < 10) else str(num)
-
     def __sub_digital(self, num: int):
         return str(num//10) if(num > 99) else str(num)
 
-    def __hyper_time(self):
-        return self.__add_digital(self.__hour*60+self.__min)
-
     def __str__(self):
-        return self.__hyper_time() + ':'+self.__add_digital(self.__sec) + ":" + self.__sub_digital(self.__min_sec)
+        return str(self.__hour) + ":" + str(self.__min) + ":" + str(self.__sec) + '.' + self.__sub_digital(self.__min_sec)
 
     def to_time(self):
         return datetime.time(hour=self.hour, minute=self.min, second=self.sec, microsecond=self.min_sec*1000)
