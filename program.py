@@ -1,8 +1,9 @@
-import analyser.caption_factory
+import analyser.analyser
 
 path = r'H:\开发\样本\film spliter\字幕原文件\Ant-Man.2015.720p.BluRay.x264-SPARKS.简体&英文.srt'
 dir = r'H:\开发\样本\film spliter\字幕原文件'
+dir2 = r'H:\开发\样本\film spliter\测试环境'
 
-file_list = analyser.caption_factory.CaptionFactory.load_dir(dir)
-print('the caption files had been loaded.')
+al = analyser.analyser.Analyser(dir2)
+print('the caption files have been analysed.')
 
