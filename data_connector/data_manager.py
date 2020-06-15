@@ -25,6 +25,8 @@ class DataManager:
         return is_success
 
     def get_translation(self, word: str):
+        if "\'" in word:
+            return None
         cursor = self.__connection.cursor()
         cursor.execute("select translation from enwords where word='%s'" % word)
         try:

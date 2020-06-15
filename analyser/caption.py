@@ -49,5 +49,5 @@ class Caption:
         self.__id = int(row_fragments[0])
         self.__start_tick = Tick(tick_fragments[0])
         self.__end_tick = Tick(tick_fragments[1])
-        self.__chinese = row_fragments[2]
-        self.__english = row_fragments[3]
+        self.__chinese = row_fragments[2].replace('\r', '')
+        self.__english = row_fragments[3].replace('\r', '')

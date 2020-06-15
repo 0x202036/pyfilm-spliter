@@ -29,7 +29,10 @@ class ModelSentence(data_connector.model.Model):
 
     @property
     def s_voice(self):
-        return self.__s_voice
+        if self.__s_voice:
+            return "'%s'" % self.__s_voice
+        else:
+            return 'null'
 
     @s_voice.setter
     def s_voice(self, value: str):
@@ -52,12 +55,12 @@ class ModelSentence(data_connector.model.Model):
         self.__f_name = value
 
     def to_sql(self):
-        return r"insert into t_sentence values (%s,'%s','%s','%s',%s,'%s')" \
+        return r"insert into t_sentence values (%s,'%s','%s',%s,%s,'%s')" \
                % (str(self.s_id), self.s_en, self.s_cn, self.s_voice, str(self.s_level), self.f_name)
 
-    def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str):
-        self.s_voice = 'default'
+    def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str, voice_path: str = None):
         self.__s_id = id
         self.__s_en = caption.english
         self.__s_cn = caption.chinese
         self.__f_name = f_name
+        self.s_voice = voice_path
