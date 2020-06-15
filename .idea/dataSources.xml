@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="pydev" uuid="67e7161c-dc5a-404e-b63b-26e05aaa0bce">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com:3306/pyword_api_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="words@localhost" uuid="a09b729b-c0ce-457e-b015-5cce7623eaa3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/words</jdbc-url>
+    </data-source>
+  </component>
+</project>

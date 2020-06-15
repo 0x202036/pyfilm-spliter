@@ -48,6 +48,3 @@ class Tick:
 
     def __str__(self):
         return str(self.__hour) + ":" + str(self.__min) + ":" + str(self.__sec) + '.' + self.__sub_digital(self.__min_sec)
-
-    def to_time(self):
-        return datetime.time(hour=self.hour, minute=self.min, second=self.sec, microsecond=self.min_sec*1000)

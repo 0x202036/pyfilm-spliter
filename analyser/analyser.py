@@ -28,8 +28,6 @@ class Analyser:
             self.__split_word(sentence)
 
     def __split_word(self, sentence: data_connector.model_sentence.ModelSentence):
-        # regex = re.compile(' ')
-        # words = regex.split(sentence.s_en)
         words = sentence.s_en.split(' ')
         self.__judge_level(sentence, len(words))
         for word in words:

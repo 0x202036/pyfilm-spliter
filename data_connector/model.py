@@ -1,4 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+
 class Model(metaclass=ABCMeta):
-    pass
+    @abstractmethod
+    def to_sql(self):
+        pass

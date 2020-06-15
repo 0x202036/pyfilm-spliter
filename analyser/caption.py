@@ -19,20 +19,12 @@ class Caption:
         self.__start_tick = value
 
     @property
-    def start_time(self):
-        return self.__start_tick.to_time()
-
-    @property
     def end_tick(self):
         return self.__end_tick
 
     @end_tick.setter
     def end_tick(self, value: Tick):
         self.__end_tick = value
-
-    @property
-    def end_time(self):
-        return self.__end_tick.to_time()
 
 
     @property
