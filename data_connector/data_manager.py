@@ -2,14 +2,6 @@ import pymysql
 
 
 class DataManager:
-    # server = 'rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com'
-    # user = 'pydev'
-    # password = 'vFfMlvDIKyAlzvFNwjnr'
-    # database = 'pyword_api_test'
-    # server = '127.0.0.1'
-    # user = 'root'
-    # password = 'root'
-    # database = 'words'
 
     def __init__(self, db_setting: dict):
         self.__server = db_setting['server']
