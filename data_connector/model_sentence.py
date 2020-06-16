@@ -61,7 +61,7 @@ class ModelSentence(data_connector.model.Model):
 
     def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str, voice_path: str = None):
         self.__s_id = id
-        self.__s_en = re.sub('["\']', '', caption.english)
-        self.__s_cn = re.sub('["\']', '', caption.chinese)
+        self.__s_en = caption.english.replace('\'', '\\\'')
+        self.__s_cn = caption.chinese.replace('\'', '\\\'')
         self.__f_name = f_name
         self.s_voice = voice_path

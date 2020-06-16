@@ -62,7 +62,7 @@ class CaptionFactory:
     # 过滤句子，筛选掉不能加入数据库的句子。
     @staticmethod
     def __filter(sentence: str):
-        return len(sentence) > 10 and not re.search('[^A-z.?!\"\'\- \r]', sentence)
+        return len(sentence) > 10 and not re.search('[^A-z.,?!\"\'\- \r]', sentence)
 
     # 建立例句列表，该列表将被analyser.py用于分析单词
     @staticmethod

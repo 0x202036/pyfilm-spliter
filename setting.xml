@@ -9,9 +9,9 @@
         <audio_path>D:\pyfilm_audio</audio_path>
     </path>
     <database>
-        <server>127.0.0.1</server>
-        <user>root</user>
-        <password>root</password>
-        <db_name>words</db_name>
+        <server>rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com</server>
+        <user>pydev</user>
+        <password>vFfMlvDIKyAlzvFNwjnr</password>
+        <db_name>pyword_api_test</db_name>
     </database>
 </setting>
