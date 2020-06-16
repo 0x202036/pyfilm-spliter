@@ -43,15 +43,15 @@ class Analyser:
         self.__judge_level(sentence, len(words))
         dm = data_connector.data_manager.DataManager(self.db_setting)
         for word in words:
-            trans = dm.get_translation(word)
+            trans = dm.get_translation(word.lower())
             if trans:
                 is_include = False
                 for word_model in self.__word_list:
-                    if word == word_model.word:
+                    if word.lower() == word_model.word:
                         word_model.sentences += '|' + str(sentence.s_id)
                         is_include = True
                 if not is_include:
-                    self.__word_list.append(data_connector.model_word.ModelWord(word, str(sentence.s_id), trans))
+                    self.__word_list.append(data_connector.model_word.ModelWord(word.lower(), str(sentence.s_id), trans))
         dm.close_connection()
 
     def __judge_level(self, sentence: data_connector.model_sentence.ModelSentence, words_num: int):

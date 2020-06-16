@@ -59,7 +59,7 @@ class CaptionFactory:
     #过滤句子，筛选掉不能加入数据库的句子。改写and后的true实现
     @staticmethod
     def __filter(sentence: str):
-        return len(sentence) > 10 and not re.search('[^A-z.?!\"&\'\- \r]', sentence)
+        return len(sentence) > 10 and not re.search('[^A-z.?!\"\'\- \r]', sentence)
 
     @staticmethod
     def __build_sentence_list(id: int, caption_list: list, f_name: str, source_film: str=None, target_audio: str=None):
