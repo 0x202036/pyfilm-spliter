@@ -44,6 +44,7 @@ class CaptionFactory:
             if file.endswith(".mp4"):
                 if file[: -4] == srt_name[: -4]:
                     is_found = True
+                    break
         return is_found
 
 

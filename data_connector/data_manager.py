@@ -2,16 +2,24 @@ import pymysql
 
 
 class DataManager:
-    server = '127.0.0.1'
-    user = 'root'
-    password = 'root'
-    database = 'words'
+    # server = 'rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com'
+    # user = 'pydev'
+    # password = 'vFfMlvDIKyAlzvFNwjnr'
+    # database = 'pyword_api_test'
+    # server = '127.0.0.1'
+    # user = 'root'
+    # password = 'root'
+    # database = 'words'
 
-    def __init__(self):
+    def __init__(self, db_setting: dict):
+        self.__server = db_setting['server']
+        self.__user = db_setting['user']
+        self.__password = db_setting['password']
+        self.__database = db_setting['database']
         self.__connection = self.build_connection()
 
     def build_connection(self):
-        return pymysql.connect(self.server, self.user, self.password, self.database)
+        return pymysql.connect(self.__server, self.__user, self.__password, self.__database)
 
     def execute_sql(self, sql: str):
         cursor = self.__connection.cursor()

@@ -27,7 +27,7 @@ class ModelWord(data_connector.model.Model):
         self.__sentences = value
 
     def to_sql(self):
-        return r"insert into t_word values ('%s','%s','%s')" % (self.word, self.translation, self.sentences)
+        return "insert into t_word values ('%s','%s','%s')" % (self.word, self.translation, self.sentences)
 
     def __init__(self, word: str, sentences: str, trans: str):
         self.__word = word

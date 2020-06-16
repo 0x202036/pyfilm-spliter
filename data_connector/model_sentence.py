@@ -30,7 +30,7 @@ class ModelSentence(data_connector.model.Model):
     @property
     def s_voice(self):
         if self.__s_voice:
-            return "'%s'" % self.__s_voice
+            return "'%s'" % self.__s_voice.replace("\\", '\\\\')
         else:
             return 'null'
 
@@ -55,7 +55,7 @@ class ModelSentence(data_connector.model.Model):
         self.__f_name = value
 
     def to_sql(self):
-        return r"insert into t_sentence values (%s,'%s','%s',%s,%s,'%s')" \
+        return "insert into t_sentence values (%s,'%s','%s',%s,%s,'%s')" \
                % (str(self.s_id), self.s_en, self.s_cn, self.s_voice, str(self.s_level), self.f_name)
 
     def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str, voice_path: str = None):

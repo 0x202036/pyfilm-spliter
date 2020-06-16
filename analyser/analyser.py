@@ -2,7 +2,7 @@ import analyser.caption_factory
 import data_connector.model_sentence
 import data_connector.model_word
 import data_connector.data_manager
-import re
+from xml.etree.ElementTree import *
 
 
 class Analyser:
@@ -22,11 +22,12 @@ class Analyser:
     def word_list(self, value):
         self.__word_list = value
 
-    def __init__(self, dir: str, audio_path: str, start_id: int = 0):
+    def __init__(self, start_id: int = 0):
+        self.db_setting = self.__decode_xml()
         print('分解字幕文件并分割视频....')
-        self.__sentence_list = analyser.caption_factory.CaptionFactory.load_dir(dir, start_id, audio_path)
+        self.__sentence_list = analyser.caption_factory.CaptionFactory.load_dir(self.__caption_path, start_id, self.__audio_path)
         self.__word_list = []
-        dm = data_connector.data_manager.DataManager()
+        dm = data_connector.data_manager.DataManager(self.db_setting)
         print('分析例句并上传....')
         for sentence in self.__sentence_list:
             self.__split_word(sentence)
@@ -40,7 +41,7 @@ class Analyser:
     def __split_word(self, sentence: data_connector.model_sentence.ModelSentence):
         words = sentence.s_en.split(' ')
         self.__judge_level(sentence, len(words))
-        dm = data_connector.data_manager.DataManager()
+        dm = data_connector.data_manager.DataManager(self.db_setting)
         for word in words:
             trans = dm.get_translation(word)
             if trans:
@@ -60,3 +61,16 @@ class Analyser:
             sentence.s_level = 1
         else:
             sentence.s_level = 2
+
+    def __decode_xml(self):
+        db_setting = {}
+        setting = parse('.\\setting.xml')
+        for item in setting.iterfind('path'):
+            self.__caption_path = item.findtext('caption_path')
+            self.__audio_path = item.findtext('audio_path')
+        for item in setting.iterfind('database'):
+            db_setting.update({'server': item.findtext('server')})
+            db_setting.update({'user': item.findtext('user')})
+            db_setting.update({'password': item.findtext('password')})
+            db_setting.update({'database': item.findtext('db_name')})
+        return db_setting

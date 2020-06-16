@@ -1,12 +1,10 @@
-import data_connector.data_manager
-import data_connector.model_sentence
-import analyser.caption
-import re
+from xml.etree.ElementTree import *
 
-# dm = data_connector.data_manager.DataManager()
-# trans = dm.get_translation("WORK")
-# dm.close_connection()
-# print(trans)
-regex = re.compile('[^A-z.?!\"&\'\- ]')
-res = regex.search("You're supposed to be in Moscow.{")
-print(bool(res))
+
+
+def decode_xml(self):
+    setting = parse('.\\setting.xml')
+    for item in setting.iterfind('path'):
+        caption_path = item.findtext('caption_path')
+    print(caption_path)
+
