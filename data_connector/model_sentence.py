@@ -17,7 +17,7 @@ class ModelSentence(data_connector.model.Model):
         return self.__s_en
 
     @s_en.setter
-    def sen(self, value: str):
+    def s_en(self, value: str):
         self.__s_en = value
 
     @property

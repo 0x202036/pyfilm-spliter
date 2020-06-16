@@ -1,6 +1,4 @@
-import datetime
-
-
+# 一个重构的时间类，通过str可以得到moviepy裁切电影的标准时刻字符串
 class Tick:
 
     @property

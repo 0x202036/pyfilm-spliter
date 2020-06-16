@@ -23,11 +23,11 @@ class Analyser:
         self.__word_list = value
 
     def __init__(self, start_id: int = 0):
-        self.db_setting = self.__decode_xml()
+        self.__db_setting = self.__decode_xml()
         print('分解字幕文件并分割视频....')
         self.__sentence_list = analyser.caption_factory.CaptionFactory.load_dir(self.__caption_path, start_id, self.__audio_path)
         self.__word_list = []
-        dm = data_connector.data_manager.DataManager(self.db_setting)
+        dm = data_connector.data_manager.DataManager(self.__db_setting)
         print('分析例句并上传....')
         for sentence in self.__sentence_list:
             self.__split_word(sentence)
@@ -38,10 +38,11 @@ class Analyser:
         dm.close_connection()
         print('作业结束。')
 
+    # 从例句中分割出单词并保存
     def __split_word(self, sentence: data_connector.model_sentence.ModelSentence):
         words = sentence.s_en.split(' ')
         self.__judge_level(sentence, len(words))
-        dm = data_connector.data_manager.DataManager(self.db_setting)
+        dm = data_connector.data_manager.DataManager(self.__db_setting)
         for word in words:
             trans = dm.get_translation(word.lower())
             if trans:
@@ -54,6 +55,7 @@ class Analyser:
                     self.__word_list.append(data_connector.model_word.ModelWord(word.lower(), str(sentence.s_id), trans))
         dm.close_connection()
 
+    # 判断例句难度
     def __judge_level(self, sentence: data_connector.model_sentence.ModelSentence, words_num: int):
         if words_num < 8:
             sentence.s_level = 0
@@ -62,6 +64,7 @@ class Analyser:
         else:
             sentence.s_level = 2
 
+    # 解析xml文件
     def __decode_xml(self):
         db_setting = {}
         setting = parse('.\\setting.xml')

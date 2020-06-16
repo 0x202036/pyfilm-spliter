@@ -1,0 +1,6 @@
+date:Tue Jun 16 18:11:32 2020
+================================================
+Done!
+word_count:	30
+sentence_count:	6
+All data have been uploaded in database.

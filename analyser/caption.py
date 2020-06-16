@@ -26,7 +26,6 @@ class Caption:
     def end_tick(self, value: Tick):
         self.__end_tick = value
 
-
     @property
     def english(self):
         return self.__english
