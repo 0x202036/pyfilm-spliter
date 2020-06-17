@@ -4,6 +4,7 @@ import chardet
 import re
 import os
 import film_spliter.spliter
+from .caption_merger import CaptionMerger
 
 
 class CaptionFactory:
@@ -11,15 +12,15 @@ class CaptionFactory:
     # 载入并解析一个srt字幕文件，载入前最好用auto_rename_tool清洗一下文件名
     @staticmethod
     def load_srt_file(path: str):
-        caption_list = []
+        merger = CaptionMerger()
         regex = re.compile('^\r\n', re.M)
         file_lines = CaptionFactory.__load_file(path)
         for raw_caption in regex.split(file_lines):
             if raw_caption != '':
                 temp_caption = analyser.caption.Caption(raw_caption)
                 if CaptionFactory.__filter(temp_caption.english):
-                    caption_list.append(temp_caption)
-        return caption_list
+                    merger.merge_caption(temp_caption)
+        return merger.merge_result
 
     # 载入存放srt字幕文件的路径，此路径的所有srt文件将被载入，同时查找该路径下的电影，有则被分割为音频例句文件
     @staticmethod
@@ -70,10 +71,21 @@ class CaptionFactory:
         s_list = []
         for caption in caption_list:
             id += 1
+            level = CaptionFactory.__judge_level(caption.english)
             if source_film:
                 audio_file = film_spliter.spliter.Spliter.split_to_mp3(source_film, target_audio, caption)
                 s_list.append(
-                    data_connector.model_sentence.ModelSentence(id, caption, f_name, target_audio + "\\" + audio_file))
+                    data_connector.model_sentence.ModelSentence(id, caption, f_name, level, target_audio + "\\" + audio_file))
             else:
-                s_list.append(data_connector.model_sentence.ModelSentence(id, caption, f_name))
+                s_list.append(data_connector.model_sentence.ModelSentence(id, caption, f_name, level))
         return s_list
+
+    @staticmethod
+    def __judge_level(s: str):
+        if len(s) < 45:
+            level = 0
+        elif len(s) < 94:
+            level = 1
+        else:
+            level = 2
+        return level

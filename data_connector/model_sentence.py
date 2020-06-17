@@ -59,9 +59,10 @@ class ModelSentence(data_connector.model.Model):
         return "insert into t_sentence values (%s,'%s','%s',%s,%s,'%s')" \
                % (str(self.s_id), self.s_en, self.s_cn, self.s_voice, str(self.s_level), self.f_name)
 
-    def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str, voice_path: str = None):
+    def __init__(self, id: int, caption: analyser.caption.Caption, f_name: str, level: int, voice_path: str = None):
         self.__s_id = id
         self.__s_en = caption.english.replace('\'', '\\\'')
         self.__s_cn = caption.chinese.replace('\'', '\\\'')
         self.__f_name = f_name
+        self.__s_level = level
         self.s_voice = voice_path

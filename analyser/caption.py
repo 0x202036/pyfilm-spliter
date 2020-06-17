@@ -1,4 +1,5 @@
 from .tick import *
+from functools import singledispatch
 
 
 class Caption:
@@ -42,7 +43,7 @@ class Caption:
     def chinese(self, value: str):
         self.__chinese = value
 
-    def __init__(self, caption_str: str):
+    def __init_prop(self,caption_str: str):
         row_fragments = caption_str.split('\n')
         tick_fragments = row_fragments[1].split('-->')
         self.__id = int(row_fragments[0])
@@ -50,3 +51,29 @@ class Caption:
         self.__end_tick = Tick(tick_fragments[1])
         self.__chinese = row_fragments[2].replace('\r', '')
         self.__english = row_fragments[3].replace('\r', '')
+
+    @singledispatch
+    def __init__(self, caption_str: str=None):
+        if caption_str is not None:
+            self.__init_prop(caption_str)
+        else:
+            self.__id = 0
+            self.__start_tick = Tick()
+            self.__end_tick = Tick()
+            self.__chinese = ""
+            self.__english = ""
+
+    def __add__(self, other):
+        c_new = Caption()
+        c_new.id = self.id
+        c_new.start_tick = self.start_tick
+        c_new.end_tick = other.end_tick
+        c_new.english = self.english + ' ' + other.english
+        c_new.chinese = self.chinese + ' ' + other.chinese
+        return c_new
+
+    def __bool__(self):
+        return bool(self.english)
+
+    def __str__(self):
+        return self.english

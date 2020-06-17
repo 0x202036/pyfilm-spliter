@@ -3,6 +3,7 @@ import data_connector.model_sentence
 import data_connector.model_word
 import data_connector.data_manager
 from xml.etree.ElementTree import *
+import re
 
 
 class Analyser:
@@ -41,28 +42,19 @@ class Analyser:
     # 从例句中分割出单词并保存
     def __split_word(self, sentence: data_connector.model_sentence.ModelSentence):
         words = sentence.s_en.split(' ')
-        self.__judge_level(sentence, len(words))
         dm = data_connector.data_manager.DataManager(self.__db_setting)
         for word in words:
-            trans = dm.get_translation(word.lower())
+            clean_word = re.sub('[,.!?:]', '', word.lower())
+            trans = dm.get_translation(clean_word)
             if trans:
                 is_include = False
                 for word_model in self.__word_list:
-                    if word.lower() == word_model.word:
+                    if clean_word == word_model.word:
                         word_model.sentences += '|' + str(sentence.s_id)
                         is_include = True
                 if not is_include:
-                    self.__word_list.append(data_connector.model_word.ModelWord(word.lower(), str(sentence.s_id), trans))
+                    self.__word_list.append(data_connector.model_word.ModelWord(clean_word, str(sentence.s_id), trans))
         dm.close_connection()
-
-    # 判断例句难度
-    def __judge_level(self, sentence: data_connector.model_sentence.ModelSentence, words_num: int):
-        if words_num < 8:
-            sentence.s_level = 0
-        elif words_num < 16:
-            sentence.s_level = 1
-        else:
-            sentence.s_level = 2
 
     # 解析xml文件
     def __decode_xml(self):
