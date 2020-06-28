@@ -8,6 +8,7 @@ from .caption_merger import CaptionMerger
 
 
 class CaptionFactory:
+    __bad_words = ['fuck', 'damn']
 
     # 载入并解析一个srt字幕文件，载入前最好用auto_rename_tool清洗一下文件名
     @staticmethod
@@ -63,7 +64,12 @@ class CaptionFactory:
     # 过滤句子，筛选掉不能加入数据库的句子。
     @staticmethod
     def __filter(sentence: str):
-        return len(sentence) > 10 and not re.search('[^A-z.,?!\"\'\- \r]', sentence)
+        no_bad_word = True
+        for bw in CaptionFactory.__bad_words:
+            if bw in sentence.lower():
+                no_bad_word = False
+                break
+        return len(sentence) > 10 and not re.search('[^A-z.,?!\"\'\- \r]', sentence) and no_bad_word
 
     # 建立例句列表，该列表将被analyser.py用于分析单词
     @staticmethod

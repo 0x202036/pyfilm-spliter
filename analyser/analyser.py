@@ -7,6 +7,7 @@ import re
 
 
 class Analyser:
+
     @property
     def sentence_list(self):
         return self.__sentence_list
@@ -55,6 +56,7 @@ class Analyser:
                 if not is_include:
                     self.__word_list.append(data_connector.model_word.ModelWord(clean_word, str(sentence.s_id), trans))
         dm.close_connection()
+
 
     # 解析xml文件
     def __decode_xml(self):
