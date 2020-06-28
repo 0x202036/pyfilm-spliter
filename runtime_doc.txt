@@ -1,6 +1,46 @@
-date:Sun Jun 28 14:29:46 2020
+date:Sun Jun 28 21:11:06 2020
 ================================================
-Done!
-word_count:	1238
-sentence_count:	1071
-All data have been uploaded in database.
+Warning!
+警告内容：	读取配置文件失败
+错误类型str(Exception):	<class 'Exception'>
+友好提示str(e):	mismatched tag: line 17, column 2
+详细错误类型repr(e):	ParseError('mismatched tag: line 17, column 2')
+traceback.print_exc():	None
+异常链traceback.format_exc():
+Traceback (most recent call last):
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 32, in __init__
+    self.__db_setting = self.__decode_xml()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 76, in __decode_xml
+    setting = parse('.\\setting.xml')
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 1202, in parse
+    tree.parse(source, parser)
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 595, in parse
+    self._root = parser._parse_whole(source)
+  File "<string>", line None
+xml.etree.ElementTree.ParseError: mismatched tag: line 17, column 2
+
+date:Sun Jun 28 21:11:06 2020
+================================================
+Exception Happened:
+错误类型str(Exception):	<class 'Exception'>
+友好提示str(e):	mismatched tag: line 17, column 2
+详细错误类型repr(e):	ParseError('mismatched tag: line 17, column 2')
+traceback.print_exc():	None
+异常链traceback.format_exc():
+Traceback (most recent call last):
+  File "C:/Users/zhang/PycharmProjects/pyfilm-spliter/program.py", line 7, in <module>
+    an = Analyser()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 52, in __init__
+    raise e
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 32, in __init__
+    self.__db_setting = self.__decode_xml()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 76, in __decode_xml
+    setting = parse('.\\setting.xml')
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 1202, in parse
+    tree.parse(source, parser)
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 595, in parse
+    self._root = parser._parse_whole(source)
+  File "<string>", line None
+xml.etree.ElementTree.ParseError: mismatched tag: line 17, column 2
+
+$END$

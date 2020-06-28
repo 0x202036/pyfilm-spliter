@@ -4,6 +4,9 @@ import data_connector.model_word
 import data_connector.data_manager
 from xml.etree.ElementTree import *
 import re
+import sys
+sys.path.append("../")
+from log_writer import LogWriter
 
 
 class Analyser:
@@ -25,19 +28,28 @@ class Analyser:
         self.__word_list = value
 
     def __init__(self, start_id: int = 0):
-        self.__db_setting = self.__decode_xml()
-        print('分解字幕文件并分割视频....')
-        self.__sentence_list = analyser.caption_factory.CaptionFactory.load_dir(self.__caption_path, start_id, self.__audio_path)
-        self.__word_list = []
-        dm = data_connector.data_manager.DataManager(self.__db_setting)
-        print('分析例句并上传....')
-        for sentence in self.__sentence_list:
-            self.__split_word(sentence)
-            dm.execute_sql(sentence.to_sql())
-        print('上传分析结果....')
-        for word in self.__word_list:
-            dm.execute_sql(word.to_sql())
-        dm.close_connection()
+        try:
+            self.__db_setting = self.__decode_xml()
+            print('分解字幕文件并分割视频....')
+            self.__sentence_list = analyser.caption_factory.CaptionFactory.load_dir(self.__caption_path, start_id,
+                                                                                    self.__audio_path)
+            self.__word_list = []
+            try:
+                dm = data_connector.data_manager.DataManager(self.__db_setting)
+                print('分析例句并上传....')
+                for sentence in self.__sentence_list:
+                    self.__split_word(sentence)
+                    dm.execute_sql(sentence.to_sql())
+                print('上传分析结果....')
+                for word in self.__word_list:
+                    dm.execute_sql(word.to_sql())
+                dm.close_connection()
+            except Exception as e:
+                LogWriter.write_warning(e, "连接数据库失败")
+                raise e
+        except Exception as e:
+            LogWriter.write_warning(e, "读取配置文件失败")
+            raise e
         print('作业结束。')
 
     # 从例句中分割出单词并保存

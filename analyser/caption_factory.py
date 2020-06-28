@@ -5,6 +5,9 @@ import re
 import os
 import film_spliter.spliter
 from .caption_merger import CaptionMerger
+import sys
+sys.path.append("../")
+from log_writer import LogWriter
 
 
 class CaptionFactory:
@@ -31,13 +34,19 @@ class CaptionFactory:
         for file in files:
             if file.endswith(".srt"):
                 is_have_film = CaptionFactory.__find_film(path, file)
-                caption_list = CaptionFactory.load_srt_file(path + '\\' + file)
-                if not is_have_film:
-                    sentence_list += CaptionFactory.__build_sentence_list(id, caption_list, file[:-4])
-                else:
-                    film_source = path + '\\' + file[:-4] + ".mp4"
-                    sentence_list += CaptionFactory.__build_sentence_list(id, caption_list, file[:-4], film_source, audio_path)
-                id += len(caption_list)
+                try:
+                    caption_list = CaptionFactory.load_srt_file(path + '\\' + file)
+                    if not is_have_film:
+                        sentence_list += CaptionFactory.__build_sentence_list(id, caption_list, file[:-4])
+                    else:
+                        film_source = path + '\\' + file[:-4] + ".mp4"
+                        sentence_list += CaptionFactory.__build_sentence_list(id, caption_list, file[:-4], film_source,
+                                                                              audio_path)
+                    id += len(caption_list)
+                except IOError as e:
+                    LogWriter.write_warning(e, "字幕文件读取失败，文件名："+str(file))
+                except ValueError as e:
+                    LogWriter.write_warning(e, "字幕文件解析失败，文件名："+str(file))
         return sentence_list
 
     # 寻找path路径下与srt_name名称相同的mp4文件（电影）
@@ -76,14 +85,25 @@ class CaptionFactory:
     def __build_sentence_list(id: int, caption_list: list, f_name: str, source_film: str=None, target_audio: str=None):
         s_list = []
         for caption in caption_list:
-            id += 1
-            level = CaptionFactory.__judge_level(caption.english)
-            if source_film:
-                audio_file = film_spliter.spliter.Spliter.split_to_mp3(source_film, target_audio, caption)
-                s_list.append(
-                    data_connector.model_sentence.ModelSentence(id, caption, f_name, level, target_audio + "\\" + audio_file))
-            else:
-                s_list.append(data_connector.model_sentence.ModelSentence(id, caption, f_name, level))
+            try:
+                id += 1
+                level = CaptionFactory.__judge_level(caption.english)
+                if source_film:
+                    try:
+                        audio_file = film_spliter.spliter.Spliter.split_to_mp3(source_film, target_audio, caption)
+                    except ValueError as e:
+                        LogWriter.write_warning(e, "视频裁切模块错误")
+                        audio_file = ""
+                    except IOError as e:
+                        LogWriter.write_warning(e, "读取视频文件或写入音频文件失败")
+                        audio_file = ""
+                    s_list.append(
+                        data_connector.model_sentence.ModelSentence(id, caption, f_name, level,
+                                                                    target_audio + "\\" + audio_file))
+                else:
+                    s_list.append(data_connector.model_sentence.ModelSentence(id, caption, f_name, level))
+            except ValueError as e:
+                LogWriter.write_warning(e, "字符串分割错误：原句为"+caption.english)
         return s_list
 
     @staticmethod
