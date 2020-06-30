@@ -1,46 +1,113 @@
-date:Sun Jun 28 21:11:06 2020
+date:Mon Jun 29 11:30:13 2020
+================================================
+Warning!
+警告内容：	连接数据库失败
+错误类型str(Exception):	<class 'Exception'>
+友好提示str(e):	(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+详细错误类型repr(e):	OperationalError(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+traceback.print_exc():	None
+异常链traceback.format_exc():
+Traceback (most recent call last):
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 581, in connect
+    sock = socket.create_connection(
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 808, in create_connection
+    raise err
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 38, in __init__
+    dm = data_connector.data_manager.DataManager(self.__db_setting)
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 11, in __init__
+    self.__connection = self.build_connection()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 15, in build_connection
+    return pymysql.connect(self.__server, self.__user, self.__password, self.__database)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 325, in __init__
+    self.connect()
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+
+date:Mon Jun 29 11:30:13 2020
 ================================================
 Warning!
 警告内容：	读取配置文件失败
 错误类型str(Exception):	<class 'Exception'>
-友好提示str(e):	mismatched tag: line 17, column 2
-详细错误类型repr(e):	ParseError('mismatched tag: line 17, column 2')
+友好提示str(e):	(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+详细错误类型repr(e):	OperationalError(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
 traceback.print_exc():	None
 异常链traceback.format_exc():
 Traceback (most recent call last):
-  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 32, in __init__
-    self.__db_setting = self.__decode_xml()
-  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 76, in __decode_xml
-    setting = parse('.\\setting.xml')
-  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 1202, in parse
-    tree.parse(source, parser)
-  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 595, in parse
-    self._root = parser._parse_whole(source)
-  File "<string>", line None
-xml.etree.ElementTree.ParseError: mismatched tag: line 17, column 2
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 581, in connect
+    sock = socket.create_connection(
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 808, in create_connection
+    raise err
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
 
-date:Sun Jun 28 21:11:06 2020
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 49, in __init__
+    raise e
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 38, in __init__
+    dm = data_connector.data_manager.DataManager(self.__db_setting)
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 11, in __init__
+    self.__connection = self.build_connection()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 15, in build_connection
+    return pymysql.connect(self.__server, self.__user, self.__password, self.__database)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 325, in __init__
+    self.connect()
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+
+date:Mon Jun 29 11:30:13 2020
 ================================================
 Exception Happened:
 错误类型str(Exception):	<class 'Exception'>
-友好提示str(e):	mismatched tag: line 17, column 2
-详细错误类型repr(e):	ParseError('mismatched tag: line 17, column 2')
+友好提示str(e):	(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+详细错误类型repr(e):	OperationalError(2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
 traceback.print_exc():	None
 异常链traceback.format_exc():
+Traceback (most recent call last):
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 581, in connect
+    sock = socket.create_connection(
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 808, in create_connection
+    raise err
+  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "C:/Users/zhang/PycharmProjects/pyfilm-spliter/program.py", line 7, in <module>
     an = Analyser()
   File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 52, in __init__
     raise e
-  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 32, in __init__
-    self.__db_setting = self.__decode_xml()
-  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 76, in __decode_xml
-    setting = parse('.\\setting.xml')
-  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 1202, in parse
-    tree.parse(source, parser)
-  File "c:\users\zhang\appdata\local\programs\python\python38-32\lib\xml\etree\ElementTree.py", line 595, in parse
-    self._root = parser._parse_whole(source)
-  File "<string>", line None
-xml.etree.ElementTree.ParseError: mismatched tag: line 17, column 2
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 49, in __init__
+    raise e
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\analyser\analyser.py", line 38, in __init__
+    dm = data_connector.data_manager.DataManager(self.__db_setting)
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 11, in __init__
+    self.__connection = self.build_connection()
+  File "C:\Users\zhang\PycharmProjects\pyfilm-spliter\data_connector\data_manager.py", line 15, in build_connection
+    return pymysql.connect(self.__server, self.__user, self.__password, self.__database)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\__init__.py", line 94, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 325, in __init__
+    self.connect()
+  File "C:\Users\zhang\django_basic_venv\lib\site-packages\pymysql\connections.py", line 630, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
 
 $END$

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<setting>
+    <description>
+        <app>pyfilm-spliter</app>
+        <ver>1.0</ver>
+    </description>
+    <path>
+        <caption_path>H:\开发\样本\film spliter\字幕原文件</caption_path>
+        <audio_path>D:\pyfilm_audio</audio_path>
+    </path>
+    <database>
+        <server>rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com</server>
+        <user>pydev</user>
+        <password>vFfMlvDIKyAlzvFNwjnr</password>
+        <db_name>pyword_api_test</db_name>
+    </database>
+</setting>

@@ -8,4 +8,4 @@ if __name__ == '__main__':
     except Exception as e:
         LogWriter.write_failed_doc(e)
     else:
-        LogWriter.write_success_doc((str(len(an.word_list)), str(len(an.sentence_list))))
+        LogWriter.write_success_doc(str(len(an.word_list)), str(len(an.sentence_list)))
